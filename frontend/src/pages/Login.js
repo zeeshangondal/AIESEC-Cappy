@@ -43,8 +43,15 @@ export default function Login() {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '10vh' }}>
-            <form onSubmit={handleSubmit} style={{ textAlign: 'left', width: '30%' }}>
+        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '8vh' }}>
+            <div className="company-info" style={{ marginRight: '80px' }}>
+                {/* Placeholder for Company Logo */}
+                <img src={`${process.env.PUBLIC_URL}/xandria.png`} alt="Company Logo" style={{marginRight: '90px', width: '550px', height: '550px' }} />
+
+                {/* Placeholder for Tagline */}
+                <p>Your Company Taglines yeah very gooddd dofo f</p>
+            </div>
+            <form onSubmit={handleSubmit} style={{ textAlign: 'left', width: '35%' }}>
                 <h2 className='text-center'>Log In</h2>
                 {errorMessage && <div className="text-center text-danger mb-3">{errorMessage}</div>} {/* Conditionally display the error message */}
                 <div className="form-group">
