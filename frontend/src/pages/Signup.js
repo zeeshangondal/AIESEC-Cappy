@@ -59,8 +59,15 @@ export default function Signup() {
     };
     
     return (
-        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '10vh' }}>
-            <form onSubmit={handleSubmit} style={{ textAlign: 'left', width: '60%' }}>
+        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '8vh' }}>
+            <div className="company-info" style={{ marginRight: '100px', marginBottom:'80px' }}>
+                {/* Placeholder for Company Logo */}
+                <img src={`${process.env.PUBLIC_URL}/xandria.png`} alt="Company Logo" style={{marginRight:'20px',width: '550px', height: '550px' }} />
+
+                {/* Placeholder for Tagline */}
+                <p>Your Company Tagline</p>
+            </div>
+            <form onSubmit={handleSubmit} style={{ textAlign: 'left', width: '50%' }}>
                 <h2 className='text-center mb-4'>Sign Up</h2>
                 <div className="row">
                     {/* Left Column */}
@@ -128,7 +135,7 @@ export default function Signup() {
 
                         <div className="form-group mt-2">
                             <label>Email Body</label>
-                            <textarea className="form-control" name="emailBody" value={formData.emailBody} rows='10' onChange={handleChange} required/>
+                            <textarea className="form-control" name="emailBody" value={formData.emailBody} rows='5' onChange={handleChange} required/>
                         </div>
                     </div>
                 <div className="d-flex justify-content-end mt-3">
