@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import APIs from '../APIs/users'
 import { Link, useNavigate } from 'react-router-dom';
 import { localStorageUtils } from '../APIs/localStorageUtils';
+import {FaFacebook, FaInstagram, FaLinkedin} from "react-icons/fa";
+import '../styles/Signup.css';
 
 export default function Signup() {
     const navigate = useNavigate();
@@ -59,15 +61,40 @@ export default function Signup() {
     };
     
     return (
-        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '8vh' }}>
-            <div className="company-info" style={{ marginRight: '100px', marginBottom:'80px' }}>
-                {/* Placeholder for Company Logo */}
-                <img src={`${process.env.PUBLIC_URL}/xandria.png`} alt="Company Logo" style={{marginRight:'20px',width: '550px', height: '550px' }} />
+        <div className="signup-container">
+            <div className="black-background" >
+                <div className="company-info" style={{ marginRight: '80px', backgroundColor: 'black', width: '90%' }}>
+                    {/* Placeholder for Company Logo */}
+                    <img className={"logo"}
+                         src={`${process.env.PUBLIC_URL}/logo.png`}
+                         alt="Company Logo"
+                         style={{ marginLeft: '30px', width: '550px', height: '550px' }}
+                    />
 
-                {/* Placeholder for Tagline */}
-                <p>Your Company Tagline</p>
+                    {/* Placeholder for Tagline */}
+                    <p style={{ marginLeft: '20px', color: 'white' , display: 'inline'}}>Powered by Xandria</p>
+
+                    {/* Placeholder for Social Media Icons */}
+                    <div className="social-media-icons" style={{ display: 'inline' }}>
+                        <br/>
+                        <br/>
+                        <a href="https://www.facebook.com/xandriacoai/">
+                            <FaFacebook size={30} style={{ color: '#2ec1d3' ,width: '100px'}} />
+                        </a>
+
+                        <a href="https://www.instagram.com/x.a.n.d.r.i.a/">
+                            <FaInstagram size={30} style={{ color: '#2ec1d3', width: '40px' }} />
+                        </a>
+
+                        <a href="https://www.linkedin.com/company/xandria-in/">
+                            <FaLinkedin size={30} style={{ color: '#2ec1d3', width: '89px' }} />
+                        </a>
+
+                    </div>
+                </div>
             </div>
-            <form onSubmit={handleSubmit} style={{ textAlign: 'left', width: '50%' }}>
+        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '8vh', width:'60%' }}>
+            <form onSubmit={handleSubmit} style={{ textAlign: 'left', width: '70%' }}>
                 <h2 className='text-center mb-4'>Sign Up</h2>
                 <div className="row">
                     {/* Left Column */}
@@ -150,5 +177,6 @@ export default function Signup() {
                 
             </form>
         </div>
+     </div>
     );
 }
