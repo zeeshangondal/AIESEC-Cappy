@@ -33,7 +33,7 @@ async function sendEmail({
     console.log('Email sent: ' + info.response);
     return true
   } catch (error) {
-    console.log("Couldnt send")
+    console.log("Couldn't send")
     // console.error('Error sending email:', error);
     return false
   }
@@ -43,7 +43,7 @@ async function sendEmail({
 
 // Example usage:
 // sendEmail({
-//   email: 'zeeshanali@aiesec.net',
+//   email: 'saadzuko1430@gmailcom',
 //   password: 'dsgb nmnj fnxy bkpo',
 //   subject: 'Checking Auto email!',
 //   recipient: 'zeeshan.ali.gondal.0007@gmail.com',
