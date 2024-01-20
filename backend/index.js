@@ -21,9 +21,9 @@ app.use( '/user', userRouter)
 app.use( '/ep', epRouter)
 
 
-app.get('*' , (req,res)=>{
-    res.sendFile(path.join(__dirname,'public','index.html'))
-})
+// app.get('*' , (req,res)=>{
+//     res.sendFile(path.join(__dirname,'public','index.html'))
+// })
 
 
 // app.post("/upload",upload,(req,res)=>{
@@ -33,7 +33,7 @@ app.get('*' , (req,res)=>{
 
 
 app.listen(process.env.PORT||3005 , ()=>{
-    console.log(`App Listning at Port 3005`)
+    console.log(`App Listening at Port 3005`)
 })
 
 

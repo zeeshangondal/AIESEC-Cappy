@@ -1,0 +1,21 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "beta_version",
+    "main",
+    "origin",
+    "xandria/picture"
+  ],
+  "parent": {
+    "beta_version": "main",
+    "main": null,
+    "origin": "main",
+    "xandria/picture": "main"
+  },
+  "order": [
+    "main",
+    "beta_version",
+    "origin",
+    "xandria/picture"
+  ]
+}

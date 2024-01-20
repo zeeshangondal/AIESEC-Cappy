@@ -1,3 +1,4 @@
+const moment = require('moment');
 const EP = require("../Models/EP");
 const User = require("../Models/User");
 const jwt = require('jsonwebtoken');
@@ -184,7 +185,7 @@ let dispatchEmails = async (req, res) => {
                     .then(success => {
                         if (success) {
                             emailsSentCount++;
-                            let updates = { firstContacted: true, status: "Email Contacted" }
+                            let updates = { firstContacted: true, status: "Email Contacted", lastContacted: new Date() }
                             EP.findOneAndUpdate({ _id: ep._id }, updates, { new: true })
                                 .then((updatedEP) => {
                                     if (updatedEP) {
@@ -203,6 +204,48 @@ let dispatchEmails = async (req, res) => {
 
         // Wait for all email promises to complete
         await Promise.all(emailPromises);
+
+        // Check and update statuses after 3 and 15 days
+        let currentDate = new Date();
+        usersWithEPs.forEach(user => {
+            user.assignedEps.forEach(ep => {
+                if (ep.status === "Email Contacted") {
+                    // Check if 3 days have passed since the last contact
+                    if (moment(currentDate).diff(moment(ep.lastContacted), 'days') >= 3) {
+                        // Resend the email
+                        sendEmail({
+                            email: user.email,
+                            password: user.appPassword,
+                            subject: user.emailSubject,
+                            recipient: ep.email,
+                            body: user.emailBody
+                        });
+                        // Update the lastContacted field
+                        EP.findByIdAndUpdate(ep._id, { lastContacted: new Date() }, { new: true })
+                            .then(updatedEP => {
+                                console.log(`Resent email to ${ep.name} after 3 days`);
+                            })
+                            .catch(err => {
+                                console.error(`Error resending email to ${ep.name}: ${err.message}`);
+                            });
+                    }
+
+                    // Check if 15 days have passed since the last contact
+                    if (moment(currentDate).diff(moment(ep.lastContacted), 'days') >= 15) {
+                        // Delete the record from the database
+                        EP.findByIdAndDelete(ep._id)
+                            .then(deletedEP => {
+                                if (deletedEP) {
+                                    console.log(`Deleted EP record for ${ep.name} after 15 days`);
+                                }
+                            })
+                            .catch(err => {
+                                console.error(`Error deleting EP record for ${ep.name}: ${err.message}`);
+                            });
+                    }
+                }
+            });
+        });
 
         // Return the data in the response
         res.status(200).send({
